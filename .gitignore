@@ -63,6 +63,10 @@ yarn-error.log*
 *.swo
 *~
 
+# Generated curation outputs
+data/catalog/tools.json
+data/golden_set_train.json
+
 # ML / data artifacts
 *.pt
 *.pth
@@ -72,6 +76,5 @@ yarn-error.log*
 *.joblib
 checkpoints/
 models/
-data/
 *.csv
 *.parquet

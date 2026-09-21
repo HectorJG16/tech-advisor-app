@@ -1,0 +1,547 @@
+{
+  "version": "1.0",
+  "niche": "ai_curation_automation_for_businesses",
+  "scenario_count": 30,
+  "scenarios": [
+    {
+      "id": "gs-001",
+      "profile": {
+        "industry": "e-commerce",
+        "company_size": "small",
+        "budget_range": "100_to_500",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["automate_support", "deflect_tickets"],
+        "existing_stack": ["shopify"],
+        "constraints": [],
+        "free_text_summary": "5-person online store needs AI chat for order status and returns."
+      },
+      "expected_tool_slugs": ["intercom-fin", "tidio-lyro", "freshdesk-freddy"],
+      "primary_label": "intercom-fin",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-002",
+      "profile": {
+        "industry": "b2b_saas",
+        "company_size": "medium",
+        "budget_range": "500_to_2000",
+        "technical_maturity": "low_code",
+        "primary_goals": ["automate_sales", "personalize_outreach"],
+        "existing_stack": ["hubspot"],
+        "constraints": ["must_integrate_hubspot"],
+        "free_text_summary": "30-person SaaS sales team wants AI for outbound and CRM workflows."
+      },
+      "expected_tool_slugs": ["hubspot-ai", "clay", "copy-ai"],
+      "primary_label": "hubspot-ai",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-003",
+      "profile": {
+        "industry": "professional_services",
+        "company_size": "solo",
+        "budget_range": "under_100",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["automate_workflows", "connect_apps"],
+        "existing_stack": ["google_workspace"],
+        "constraints": [],
+        "free_text_summary": "Freelance consultant wants to automate lead capture and email follow-ups."
+      },
+      "expected_tool_slugs": ["zapier-ai", "make", "bardeen"],
+      "primary_label": "zapier-ai",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-004",
+      "profile": {
+        "industry": "enterprise",
+        "company_size": "enterprise",
+        "budget_range": "enterprise",
+        "technical_maturity": "developer",
+        "primary_goals": ["automate_back_office", "document_processing"],
+        "existing_stack": ["sap", "microsoft_365"],
+        "constraints": ["compliance_required"],
+        "free_text_summary": "Global insurer wants enterprise RPA for claims document processing."
+      },
+      "expected_tool_slugs": ["uipath", "microsoft-copilot-m365", "salesforce-einstein"],
+      "primary_label": "uipath",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-005",
+      "profile": {
+        "industry": "software",
+        "company_size": "medium",
+        "budget_range": "100_to_500",
+        "technical_maturity": "developer",
+        "primary_goals": ["accelerate_development", "code_assist"],
+        "existing_stack": ["github"],
+        "constraints": [],
+        "free_text_summary": "40-engineer product team wants AI coding assistance with org policies."
+      },
+      "expected_tool_slugs": ["github-copilot-business", "cursor-business"],
+      "primary_label": "github-copilot-business",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-006",
+      "profile": {
+        "industry": "retail",
+        "company_size": "small",
+        "budget_range": "free",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["automate_support", "live_chat"],
+        "existing_stack": ["shopify", "wordpress"],
+        "constraints": ["minimal_budget"],
+        "free_text_summary": "Boutique shop needs free or cheap AI chat for basic FAQs."
+      },
+      "expected_tool_slugs": ["tidio-lyro", "freshdesk-freddy", "zapier-ai"],
+      "primary_label": "tidio-lyro",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-007",
+      "profile": {
+        "industry": "marketing",
+        "company_size": "small",
+        "budget_range": "100_to_500",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["generate_content", "brand_consistency"],
+        "existing_stack": [],
+        "constraints": [],
+        "free_text_summary": "Agency needs AI to draft social and email content with brand voice."
+      },
+      "expected_tool_slugs": ["jasper", "copy-ai", "grammarly-business"],
+      "primary_label": "jasper",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-008",
+      "profile": {
+        "industry": "finance",
+        "company_size": "large",
+        "budget_range": "enterprise",
+        "technical_maturity": "low_code",
+        "primary_goals": ["business_intelligence", "forecasting"],
+        "existing_stack": ["salesforce", "snowflake"],
+        "constraints": ["soc2"],
+        "free_text_summary": "Bank analytics team wants AI-assisted BI on Salesforce data."
+      },
+      "expected_tool_slugs": ["tableau-ai", "salesforce-einstein", "power-bi-copilot"],
+      "primary_label": "tableau-ai",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-009",
+      "profile": {
+        "industry": "manufacturing",
+        "company_size": "large",
+        "budget_range": "500_to_2000",
+        "technical_maturity": "low_code",
+        "primary_goals": ["reporting", "forecasting"],
+        "existing_stack": ["microsoft_365", "azure"],
+        "constraints": [],
+        "free_text_summary": "Ops team on Microsoft stack needs Copilot for dashboards and reports."
+      },
+      "expected_tool_slugs": ["power-bi-copilot", "microsoft-copilot-m365", "tableau-ai"],
+      "primary_label": "power-bi-copilot",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-010",
+      "profile": {
+        "industry": "saas",
+        "company_size": "medium",
+        "budget_range": "500_to_2000",
+        "technical_maturity": "low_code",
+        "primary_goals": ["scale_support_ops", "deflect_tickets"],
+        "existing_stack": ["zendesk"],
+        "constraints": ["must_integrate_zendesk"],
+        "free_text_summary": "150-person SaaS needs AI triage and replies inside Zendesk."
+      },
+      "expected_tool_slugs": ["zendesk-ai", "forethought", "ada"],
+      "primary_label": "zendesk-ai",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-011",
+      "profile": {
+        "industry": "b2b_saas",
+        "company_size": "large",
+        "budget_range": "enterprise",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["conversation_intelligence", "sales_coaching"],
+        "existing_stack": ["salesforce", "zoom"],
+        "constraints": [],
+        "free_text_summary": "Enterprise sales org wants call analytics and deal insights."
+      },
+      "expected_tool_slugs": ["gong", "fireflies", "salesforce-einstein"],
+      "primary_label": "gong",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-012",
+      "profile": {
+        "industry": "startups",
+        "company_size": "small",
+        "budget_range": "under_100",
+        "technical_maturity": "developer",
+        "primary_goals": ["orchestrate_apis", "self_host_option"],
+        "existing_stack": ["github", "postgres"],
+        "constraints": ["prefer_self_hosted"],
+        "free_text_summary": "Startup eng team wants flexible self-hosted automation with AI nodes."
+      },
+      "expected_tool_slugs": ["n8n", "make", "zapier-ai"],
+      "primary_label": "n8n",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-013",
+      "profile": {
+        "industry": "recruiting",
+        "company_size": "small",
+        "budget_range": "100_to_500",
+        "technical_maturity": "low_code",
+        "primary_goals": ["prospect_research", "data_enrichment"],
+        "existing_stack": ["hubspot"],
+        "constraints": [],
+        "free_text_summary": "Recruiting firm needs enriched lead lists and outbound research automation."
+      },
+      "expected_tool_slugs": ["clay", "bardeen", "copy-ai"],
+      "primary_label": "clay",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-014",
+      "profile": {
+        "industry": "technology",
+        "company_size": "medium",
+        "budget_range": "500_to_2000",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["qualify_leads", "book_meetings"],
+        "existing_stack": ["salesforce"],
+        "constraints": [],
+        "free_text_summary": "B2B website with solid traffic wants conversational lead qualification."
+      },
+      "expected_tool_slugs": ["drift", "hubspot-ai", "intercom-fin"],
+      "primary_label": "drift",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-015",
+      "profile": {
+        "industry": "consulting",
+        "company_size": "medium",
+        "budget_range": "100_to_500",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["meeting_summaries", "crm_logging"],
+        "existing_stack": ["hubspot", "zoom"],
+        "constraints": [],
+        "free_text_summary": "Consulting team wants call notes synced to CRM automatically."
+      },
+      "expected_tool_slugs": ["fireflies", "otter-ai", "gong"],
+      "primary_label": "fireflies",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-016",
+      "profile": {
+        "industry": "remote_teams",
+        "company_size": "small",
+        "budget_range": "under_100",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["calendar_optimization", "focus_time"],
+        "existing_stack": ["google_calendar", "asana"],
+        "constraints": [],
+        "free_text_summary": "Remote team struggles with meeting overload and needs focus time automation."
+      },
+      "expected_tool_slugs": ["reclaim-ai", "motion", "notion-ai"],
+      "primary_label": "reclaim-ai",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-017",
+      "profile": {
+        "industry": "agencies",
+        "company_size": "small",
+        "budget_range": "100_to_500",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["project_management", "task_automation"],
+        "existing_stack": ["google_calendar"],
+        "constraints": [],
+        "free_text_summary": "Creative agency wants AI to auto-schedule client work across the team."
+      },
+      "expected_tool_slugs": ["motion", "reclaim-ai", "notion-ai"],
+      "primary_label": "motion",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-018",
+      "profile": {
+        "industry": "enterprise",
+        "company_size": "enterprise",
+        "budget_range": "enterprise",
+        "technical_maturity": "low_code",
+        "primary_goals": ["productivity", "document_drafting"],
+        "existing_stack": ["microsoft_365", "teams"],
+        "constraints": ["it_approved_vendors_only"],
+        "free_text_summary": "Fortune 500 wants Microsoft-native AI copilot for all office workers."
+      },
+      "expected_tool_slugs": ["microsoft-copilot-m365", "power-bi-copilot", "grammarly-business"],
+      "primary_label": "microsoft-copilot-m365",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-019",
+      "profile": {
+        "industry": "saas",
+        "company_size": "large",
+        "budget_range": "enterprise",
+        "technical_maturity": "developer",
+        "primary_goals": ["multilingual_support", "scale_support_ops"],
+        "existing_stack": ["salesforce", "kustomer"],
+        "constraints": ["multilingual"],
+        "free_text_summary": "Global SaaS with high ticket volume needs enterprise support automation."
+      },
+      "expected_tool_slugs": ["ada", "forethought", "zendesk-ai"],
+      "primary_label": "ada",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-020",
+      "profile": {
+        "industry": "real_estate",
+        "company_size": "small",
+        "budget_range": "under_100",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["deal_management", "email_assist"],
+        "existing_stack": [],
+        "constraints": [],
+        "free_text_summary": "Small brokerage needs simple CRM with AI email help for agents."
+      },
+      "expected_tool_slugs": ["pipedrive-ai", "hubspot-ai", "copy-ai"],
+      "primary_label": "pipedrive-ai",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-021",
+      "profile": {
+        "industry": "e-commerce",
+        "company_size": "medium",
+        "budget_range": "100_to_500",
+        "technical_maturity": "low_code",
+        "primary_goals": ["automate_workflows", "connect_apps"],
+        "existing_stack": ["shopify", "klaviyo"],
+        "constraints": [],
+        "free_text_summary": "Growing Shopify brand wants automation between store, email, and support tools."
+      },
+      "expected_tool_slugs": ["zapier-ai", "make", "intercom-fin"],
+      "primary_label": "zapier-ai",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-022",
+      "profile": {
+        "industry": "education",
+        "company_size": "medium",
+        "budget_range": "100_to_500",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["meeting_summaries", "knowledge_capture"],
+        "existing_stack": ["google_meet", "slack"],
+        "constraints": [],
+        "free_text_summary": "University admin team needs transcription for committee meetings."
+      },
+      "expected_tool_slugs": ["otter-ai", "fireflies", "notion-ai"],
+      "primary_label": "otter-ai",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-023",
+      "profile": {
+        "industry": "healthcare",
+        "company_size": "medium",
+        "budget_range": "500_to_2000",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["writing_quality", "brand_consistency"],
+        "existing_stack": ["microsoft_365"],
+        "constraints": ["hipaa_review_required"],
+        "free_text_summary": "Healthcare admin staff needs writing assistance for patient communications drafts."
+      },
+      "expected_tool_slugs": ["grammarly-business", "microsoft-copilot-m365", "notion-ai"],
+      "primary_label": "grammarly-business",
+      "confidence": "low",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-024",
+      "profile": {
+        "industry": "startups",
+        "company_size": "small",
+        "budget_range": "100_to_500",
+        "technical_maturity": "developer",
+        "primary_goals": ["agentic_coding", "accelerate_development"],
+        "existing_stack": ["github"],
+        "constraints": [],
+        "free_text_summary": "YC startup prefers AI-native IDE with repo-wide agents for fast iteration."
+      },
+      "expected_tool_slugs": ["cursor-business", "github-copilot-business"],
+      "primary_label": "cursor-business",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-025",
+      "profile": {
+        "industry": "telecom",
+        "company_size": "enterprise",
+        "budget_range": "enterprise",
+        "technical_maturity": "developer",
+        "primary_goals": ["crm_automation", "forecast_sales"],
+        "existing_stack": ["salesforce"],
+        "constraints": [],
+        "free_text_summary": "Telecom enterprise standardizing on Salesforce wants native AI forecasting."
+      },
+      "expected_tool_slugs": ["salesforce-einstein", "gong", "tableau-ai"],
+      "primary_label": "salesforce-einstein",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-026",
+      "profile": {
+        "industry": "small_business",
+        "company_size": "solo",
+        "budget_range": "under_100",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["knowledge_management", "document_drafting"],
+        "existing_stack": [],
+        "constraints": [],
+        "free_text_summary": "Solo founder wants one workspace for notes, SOPs, and AI drafting."
+      },
+      "expected_tool_slugs": ["notion-ai", "jasper", "grammarly-business"],
+      "primary_label": "notion-ai",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-027",
+      "profile": {
+        "industry": "e-commerce",
+        "company_size": "small",
+        "budget_range": "under_100",
+        "technical_maturity": "non_technical",
+        "primary_goals": ["automate_support", "agent_assist"],
+        "existing_stack": [],
+        "constraints": ["low_cost"],
+        "free_text_summary": "Shopify store owner wants affordable helpdesk with AI bot for FAQs."
+      },
+      "expected_tool_slugs": ["freshdesk-freddy", "tidio-lyro", "zapier-ai"],
+      "primary_label": "freshdesk-freddy",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-028",
+      "profile": {
+        "industry": "b2b_saas",
+        "company_size": "medium",
+        "budget_range": "500_to_2000",
+        "technical_maturity": "low_code",
+        "primary_goals": ["automate_outreach", "prospect_research"],
+        "existing_stack": ["salesforce"],
+        "constraints": [],
+        "free_text_summary": "Outbound SDR team needs enrichment plus personalized email workflows."
+      },
+      "expected_tool_slugs": ["clay", "copy-ai", "bardeen"],
+      "primary_label": "clay",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-029",
+      "profile": {
+        "industry": "professional_services",
+        "company_size": "medium",
+        "budget_range": "100_to_500",
+        "technical_maturity": "low_code",
+        "primary_goals": ["automate_browser_tasks", "data_enrichment"],
+        "existing_stack": ["google_sheets", "hubspot"],
+        "constraints": [],
+        "free_text_summary": "Legal marketing team scrapes public data into CRM for outreach lists."
+      },
+      "expected_tool_slugs": ["bardeen", "clay", "zapier-ai"],
+      "primary_label": "bardeen",
+      "confidence": "medium",
+      "verified": true,
+      "synthetic": false
+    },
+    {
+      "id": "gs-030",
+      "profile": {
+        "industry": "agencies",
+        "company_size": "small",
+        "budget_range": "100_to_500",
+        "technical_maturity": "low_code",
+        "primary_goals": ["automate_workflows", "orchestrate_data"],
+        "existing_stack": ["airtable", "slack"],
+        "constraints": [],
+        "free_text_summary": "Marketing agency wants visual automation builder with moderate complexity."
+      },
+      "expected_tool_slugs": ["make", "zapier-ai", "n8n"],
+      "primary_label": "make",
+      "confidence": "high",
+      "verified": true,
+      "synthetic": false
+    }
+  ]
+}

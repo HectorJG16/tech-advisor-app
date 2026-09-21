@@ -1,0 +1,64 @@
+{
+  "executive_summary": "Based on your e-commerce support needs and Shopify stack, Intercom Fin is the strongest fit for automated ticket deflection while staying within your budget.",
+  "ranked_list": [
+    {
+      "tool_id": "00000000-0000-0000-0000-000000000001",
+      "slug": "intercom-fin",
+      "name": "Intercom Fin",
+      "score": 0.92,
+      "fit_reason": "Native Shopify context and strong support automation for small teams."
+    },
+    {
+      "tool_id": "00000000-0000-0000-0000-000000000002",
+      "slug": "tidio-lyro",
+      "name": "Tidio Lyro",
+      "score": 0.84,
+      "fit_reason": "Lower cost entry point with solid chat automation for small stores."
+    }
+  ],
+  "why_top_pick": [
+    "Matches your primary goal of reducing support ticket volume",
+    "Integrates with Shopify for order-aware responses",
+    "Fits a non-technical team with guided setup"
+  ],
+  "cost_estimate": {
+    "tier_name": "Pro",
+    "price_monthly": 139.0,
+    "price_currency": "USD",
+    "per_seat": false,
+    "summary": "Estimated ~$139/mo at your team size; confirm current pricing on vendor site."
+  },
+  "implementation_steps": [
+    {
+      "step": 1,
+      "title": "Connect Shopify",
+      "description": "Install the Intercom Shopify app and sync order/customer data."
+    },
+    {
+      "step": 2,
+      "title": "Configure Fin on top topics",
+      "description": "Train on order status, returns, and shipping FAQs first."
+    },
+    {
+      "step": 3,
+      "title": "Pilot and measure deflection",
+      "description": "Run for 2 weeks; track resolution rate and escalation quality."
+    }
+  ],
+  "migration_path": [
+    "No migration required if starting fresh on Intercom.",
+    "If replacing a basic chat widget, export FAQ content into Fin training sources."
+  ],
+  "tradeoffs": [
+    "Higher cost than lightweight chatbots at very small scale",
+    "Advanced customization may need admin time in first month"
+  ],
+  "alternatives": [
+    {
+      "tool_id": "00000000-0000-0000-0000-000000000002",
+      "slug": "tidio-lyro",
+      "name": "Tidio Lyro",
+      "choose_if": "You need a lower monthly cost and can accept fewer enterprise support features."
+    }
+  ]
+}

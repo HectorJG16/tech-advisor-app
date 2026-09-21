@@ -1,6 +1,6 @@
 # Phase 0 — Schemas and contracts
 
-Foundation definitions for Phase 1 data engineering.
+Foundation schemas and API contracts for the application.
 
 ## Repository layout
 
@@ -14,10 +14,9 @@ tech-advisor-app/
 ├── frontend/
 │   └── src/types/api.ts        # TypeScript mirrors of API schemas
 ├── data/
-│   ├── seed_tools.json         # Seed tool list for Phase 1A
-│   ├── golden_set.example.json # Golden set row format
+│   ├── golden_set.json         # Labeled scenarios for training/eval
 │   └── advisory_report.example.json
-├── scripts/curation/           # Phase 1 offline import scripts
+├── scripts/curation/           # Catalog import + embedding scripts
 ├── ml/                         # Phase 2 training
 └── docs/
     └── phase0-contracts.md     # This file
@@ -80,7 +79,7 @@ Design notes:
 - **Embeddings** in `tool_embeddings` with pgvector (384 dimensions)
 - **Sessions** anonymous-first; `user_id` nullable for Phase 6
 - **Recommendations** store full `report` JSONB for audit/history
-- **catalog_sources** tracks research provenance from Phase 1
+- **catalog_sources** tracks research provenance for catalog entries
 
 Extensions required: `vector`, `pgcrypto` (install as superuser before applying schema).
 

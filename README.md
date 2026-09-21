@@ -11,8 +11,8 @@ tech-advisor-app/
 │   └── schemas/       # API contracts (Phase 0)
 ├── frontend/          # Next.js web app
 │   └── src/types/     # TypeScript API types (mirror backend)
-├── data/              # Seed tools, golden set examples
-├── scripts/curation/  # Offline catalog import (Phase 1)
+├── data/              # Golden set and example payloads
+├── scripts/curation/  # Catalog import and embedding scripts
 ├── ml/                # Training + eval (Phase 2)
 └── docs/              # Architecture and contract docs
 ```
@@ -21,12 +21,16 @@ tech-advisor-app/
 
 **Phase 0 (complete)** — Schemas and contracts. See [docs/phase0-contracts.md](docs/phase0-contracts.md).
 
+**Phase 1 (complete)** — Catalog loaded (30 tools), embeddings, golden set. See [scripts/curation/README.md](scripts/curation/README.md).
+
 | Artifact | Location |
 |----------|----------|
 | Postgres schema | [backend/db/schema.sql](backend/db/schema.sql) |
 | Pydantic models | [backend/schemas/](backend/schemas/) |
 | TypeScript types | [frontend/src/types/api.ts](frontend/src/types/api.ts) |
-| Seed tool list | [data/seed_tools.json](data/seed_tools.json) |
+| Catalog source (30 tools) | [scripts/curation/catalog_data.py](scripts/curation/catalog_data.py) |
+| Golden set (30 scenarios) | [data/golden_set.json](data/golden_set.json) |
+| Curation commands | [scripts/curation/README.md](scripts/curation/README.md) |
 | Report example | [data/advisory_report.example.json](data/advisory_report.example.json) |
 
 ## Prerequisites
