@@ -23,6 +23,8 @@ tech-advisor-app/
 
 **Phase 1 (complete)** — Catalog loaded (30 tools), embeddings, golden set. See [scripts/curation/README.md](scripts/curation/README.md).
 
+**Phase 2** — Retrieval + LightGBM ranker scripts. See [ml/README.md](ml/README.md).
+
 | Artifact | Location |
 |----------|----------|
 | Postgres schema | [backend/db/schema.sql](backend/db/schema.sql) |
@@ -30,6 +32,7 @@ tech-advisor-app/
 | TypeScript types | [frontend/src/types/api.ts](frontend/src/types/api.ts) |
 | Catalog source (30 tools) | [scripts/curation/catalog_data.py](scripts/curation/catalog_data.py) |
 | Golden set (30 scenarios) | [data/golden_set.json](data/golden_set.json) |
+| ML pipeline | [ml/](ml/) |
 | Curation commands | [scripts/curation/README.md](scripts/curation/README.md) |
 | Report example | [data/advisory_report.example.json](data/advisory_report.example.json) |
 
