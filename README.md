@@ -45,6 +45,38 @@ tech-advisor-app/
 
 ## Getting started
 
+### PostgreSQL
+
+Start Postgres (Homebrew on macOS — adjust the version if yours differs):
+
+```bash
+brew services start postgresql@17
+```
+
+Other common service names: `postgresql@16`, `postgresql@15`, or `postgresql`. List installed formulae with `brew list | grep postgres`.
+
+Check that it is running:
+
+```bash
+brew services list | grep postgres
+psql -d tech_advisor -c "SELECT 1;"
+```
+
+If you use `.env`, you can also run:
+
+```bash
+source backend/venv/bin/activate   # optional; needs python-dotenv only for scripts
+psql "$DATABASE_URL" -c "SELECT 1;"
+```
+
+Stop Postgres when you are done:
+
+```bash
+brew services stop postgresql@17
+```
+
+First-time setup: create the `tech_advisor` role and database, enable `vector` and `pgcrypto`, then apply [backend/db/schema.sql](backend/db/schema.sql). See [scripts/curation/README.md](scripts/curation/README.md) for loading catalog data.
+
 ### Environment
 
 Copy `.env.example` to `.env` if you have not already, then set `POSTGRES_PASSWORD` and update `DATABASE_URL` to include it:
