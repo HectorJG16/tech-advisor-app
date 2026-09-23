@@ -23,7 +23,9 @@ tech-advisor-app/
 
 **Phase 1 (complete)** — Catalog loaded (30 tools), embeddings, golden set. See [scripts/curation/README.md](scripts/curation/README.md).
 
-**Phase 2** — Retrieval + LightGBM ranker scripts. See [ml/README.md](ml/README.md).
+**Phase 2 (complete)** — Retrieval + LightGBM ranker scripts. See [ml/README.md](ml/README.md).
+
+**Phase 3 (complete)** — FastAPI intake, ranking, and template reports. See [docs/phase3-api.md](docs/phase3-api.md).
 
 | Artifact | Location |
 |----------|----------|
@@ -97,6 +99,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Backend
 
+Requires Postgres (see above) and a trained ranker artifact (`python ml/train.py` from project root).
+
 ```bash
 cd backend
 python -m venv venv
@@ -106,3 +110,5 @@ uvicorn main:app --reload
 ```
 
 Open [http://localhost:8000/docs](http://localhost:8000/docs) for the API docs.
+
+API flow: `POST /sessions` → `POST /sessions/{id}/intake` → `POST /sessions/{id}/recommend` → optional `POST /feedback`. See [docs/phase3-api.md](docs/phase3-api.md).

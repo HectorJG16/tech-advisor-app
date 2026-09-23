@@ -39,3 +39,10 @@ torchvision==0.27.1
 typing-inspection==0.4.2
 typing_extensions==4.16.0
 uvicorn==0.50.2
+
+# Phase 3 API + ML inference
+psycopg[binary]>=3.2.0
+pgvector>=0.3.0
+python-dotenv>=1.0.0
+lightgbm>=4.0.0
+sentence-transformers>=3.0.0
