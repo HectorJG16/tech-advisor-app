@@ -14,6 +14,7 @@ import lightgbm as lgb  # noqa: F401
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.cache.redis_cache import redis_health
 from app.routes import api_router
 from schemas import HealthResponse
 
@@ -42,7 +43,7 @@ app.add_middleware(
 
 @app.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
-    return HealthResponse(status="ok")
+    return HealthResponse(status="ok", redis=redis_health())
 
 
 app.include_router(api_router)

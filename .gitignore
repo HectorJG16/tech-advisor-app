@@ -66,6 +66,7 @@ yarn-error.log*
 # Generated curation outputs
 data/catalog/tools.json
 data/golden_set_train.json
+data/feedback_scenarios.json
 
 # ML / data artifacts
 *.pt

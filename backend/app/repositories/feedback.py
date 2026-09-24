@@ -38,3 +38,50 @@ def insert_feedback(
     assert row is not None
     conn.commit()
     return row
+
+
+def fetch_unexported_feedback(conn: psycopg.Connection) -> list[dict]:
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT
+                f.id AS feedback_id,
+                f.rating,
+                f.comment,
+                f.created_at AS feedback_created_at,
+                t.slug AS selected_tool_slug,
+                sp.industry,
+                sp.company_size,
+                sp.budget_range,
+                sp.technical_maturity,
+                sp.primary_goals,
+                sp.existing_stack,
+                sp.constraints,
+                sp.free_text_summary
+            FROM recommendation_feedback f
+            JOIN recommendations r ON r.id = f.recommendation_id
+            JOIN scenario_profiles sp ON sp.id = r.scenario_id
+            JOIN tools t ON t.id = f.selected_tool_id
+            WHERE f.exported_at IS NULL
+              AND f.selected_tool_id IS NOT NULL
+            ORDER BY f.created_at ASC
+            """
+        )
+        return cur.fetchall()
+
+
+def mark_feedback_exported(conn: psycopg.Connection, feedback_ids: list[UUID]) -> int:
+    if not feedback_ids:
+        return 0
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            UPDATE recommendation_feedback
+            SET exported_at = NOW()
+            WHERE id = ANY(%s)
+            """,
+            (feedback_ids,),
+        )
+        updated = cur.rowcount
+    conn.commit()
+    return updated

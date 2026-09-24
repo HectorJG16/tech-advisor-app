@@ -7,6 +7,7 @@ MODELS_DIR = ROOT / "models"
 
 GOLDEN_SET_JSON = DATA / "golden_set.json"
 GOLDEN_SET_TRAIN_JSON = DATA / "golden_set_train.json"
+FEEDBACK_SCENARIOS_JSON = DATA / "feedback_scenarios.json"
 
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 EMBEDDING_DIM = 384

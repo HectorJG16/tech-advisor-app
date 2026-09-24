@@ -7,7 +7,8 @@ import numpy as np
 import psycopg
 
 from ml.catalog import load_tools, tools_by_slug
-from ml.config import GOLDEN_SET_JSON, GOLDEN_SET_TRAIN_JSON
+from ml.config import FEEDBACK_SCENARIOS_JSON, GOLDEN_SET_JSON, GOLDEN_SET_TRAIN_JSON
+from ml.feedback_export import load_feedback_scenarios
 from ml.features import FEATURE_NAMES, build_features, relevance_label
 from ml.retrieval import retrieve_candidates
 
@@ -16,6 +17,7 @@ def load_scenarios(
     *,
     include_synthetic: bool = False,
     verified_only: bool = True,
+    include_feedback: bool = False,
 ) -> list[dict[str, Any]]:
     path = GOLDEN_SET_TRAIN_JSON if GOLDEN_SET_TRAIN_JSON.exists() else GOLDEN_SET_JSON
     payload = json.loads(path.read_text())
@@ -28,6 +30,16 @@ def load_scenarios(
         if not include_synthetic and scenario.get("synthetic", False):
             continue
         filtered.append(scenario)
+
+    if include_feedback:
+        feedback_path = FEEDBACK_SCENARIOS_JSON
+        feedback_rows = load_feedback_scenarios() if feedback_path.exists() else []
+        seen_ids = {item["id"] for item in filtered}
+        for scenario in feedback_rows:
+            if scenario["id"] not in seen_ids:
+                filtered.append(scenario)
+                seen_ids.add(scenario["id"])
+
     return filtered
 
 

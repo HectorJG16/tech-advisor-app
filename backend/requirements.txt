@@ -46,3 +46,6 @@ pgvector>=0.3.0
 python-dotenv>=1.0.0
 lightgbm>=4.0.0
 sentence-transformers>=3.0.0
+
+# Phase 5 Redis cache
+redis>=5.0.0

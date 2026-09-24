@@ -78,7 +78,7 @@ Retrain **offline** with `python ml/train.py` when any of the following occur:
 | **Catalog changes** | New tools, pricing, tags, or embeddings updated |
 | **Golden set changes** | New verified scenarios or corrected labels |
 | **Eval regression** | After catalog edits, run `ml/eval.py`; if metrics drop, investigate and retrain |
-| **Feedback volume (Phase 5+)** | After ~50–100 new `recommendation_feedback` rows with selected tools |
+| **Feedback volume (Phase 5)** | Export with `python scripts/ml/export_feedback.py`, then `python ml/train.py --include-feedback` |
 | **Scheduled maintenance** | Optional monthly retrain once in production |
 
 Do **not** retrain on every user request. Promote a new artifact only when:

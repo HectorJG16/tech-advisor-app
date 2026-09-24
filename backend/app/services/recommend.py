@@ -4,6 +4,7 @@ from uuid import UUID
 
 import psycopg
 
+from app.cache.redis_cache import cache_get, cache_set
 from app.ml.inference import get_model_version, rank_profile
 from app.repositories import catalog as catalog_repo
 from app.repositories import profiles as profile_repo
@@ -15,8 +16,15 @@ from app.services.intake import (
 )
 from app.services.report_builder import build_advisory_report
 from schemas.advisory_report import AdvisoryReport
-from schemas.enums import IntakeMode, SessionStatus
+from schemas.enums import IntakeMode
 from schemas.scenario_profile import ScenarioProfile, ScenarioProfileCreate
+
+
+def _optional_model_version() -> str | None:
+    try:
+        return get_model_version()
+    except FileNotFoundError:
+        return None
 
 
 def _ranked_tools_payload(ranked_raw: list[dict]) -> list[dict]:
@@ -30,6 +38,33 @@ def _ranked_tools_payload(ranked_raw: list[dict]) -> list[dict]:
         }
         for item in ranked_raw
     ]
+
+
+def _payload_from_postgres_row(cached: dict) -> dict:
+    return {
+        "ranked_tools": cached["ranked_tools"],
+        "report": cached["report"],
+        "model_version": cached.get("model_version"),
+    }
+
+
+def _save_cached_recommendation(
+    conn: psycopg.Connection,
+    *,
+    session_id: UUID,
+    scenario_id: UUID,
+    payload: dict,
+) -> dict:
+    report = AdvisoryReport.model_validate(payload["report"])
+    return recommendation_repo.insert_recommendation(
+        conn,
+        session_id=session_id,
+        scenario_id=scenario_id,
+        ranked_tools=payload["ranked_tools"],
+        report=report,
+        model_version=payload.get("model_version"),
+        cache_hit=True,
+    )
 
 
 def generate_recommendation(
@@ -56,16 +91,31 @@ def generate_recommendation(
         scenario_id = latest["id"]
 
     normalized_hash = profile.normalized_hash or compute_normalized_hash(profile)
+    model_version = _optional_model_version()
+
+    redis_payload = cache_get(normalized_hash, model_version=model_version)
+    if redis_payload:
+        saved = _save_cached_recommendation(
+            conn,
+            session_id=session_id,
+            scenario_id=scenario_id,
+            payload=redis_payload,
+        )
+        report = AdvisoryReport.model_validate(redis_payload["report"])
+        return scenario_id, saved["id"], report, redis_payload.get("model_version"), True
+
     cached = recommendation_repo.find_cached_recommendation(conn, normalized_hash)
     if cached:
-        report = AdvisoryReport.model_validate(cached["report"])
-        return (
-            cached["scenario_id"],
-            cached["id"],
-            report,
-            cached.get("model_version"),
-            True,
+        payload = _payload_from_postgres_row(cached)
+        cache_set(normalized_hash, payload)
+        saved = _save_cached_recommendation(
+            conn,
+            session_id=session_id,
+            scenario_id=scenario_id,
+            payload=payload,
         )
+        report = AdvisoryReport.model_validate(payload["report"])
+        return scenario_id, saved["id"], report, payload.get("model_version"), True
 
     ranked_raw = rank_profile(conn, profile_to_ml_dict(profile))
     if not ranked_raw:
@@ -74,14 +124,26 @@ def generate_recommendation(
     slugs = [item["slug"] for item in ranked_raw]
     tools = catalog_repo.load_tool_records(conn, slugs)
     report = build_advisory_report(profile, ranked_raw, tools)
+    ranked_tools = _ranked_tools_payload(ranked_raw)
+    model_version = get_model_version()
 
     saved = recommendation_repo.insert_recommendation(
         conn,
         session_id=session_id,
         scenario_id=scenario_id,
-        ranked_tools=_ranked_tools_payload(ranked_raw),
+        ranked_tools=ranked_tools,
         report=report,
-        model_version=get_model_version(),
+        model_version=model_version,
         cache_hit=False,
     )
-    return scenario_id, saved["id"], report, get_model_version(), False
+
+    cache_set(
+        normalized_hash,
+        {
+            "ranked_tools": ranked_tools,
+            "report": report.model_dump(mode="json"),
+            "model_version": model_version,
+        },
+    )
+
+    return scenario_id, saved["id"], report, model_version, False

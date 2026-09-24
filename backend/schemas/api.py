@@ -91,3 +91,4 @@ class FeedbackResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str
+    redis: str | None = None

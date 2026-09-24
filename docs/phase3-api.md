@@ -68,7 +68,8 @@ curl -s -X POST "http://localhost:8000/sessions/$SESSION/recommend" \
 
 ```
 IntakeRequest → intake normalizer → scenario_profiles (hash + embedding)
-RecommendRequest → cache lookup (normalized_hash)
+RecommendRequest → Redis cache (normalized_hash)
+                 → Postgres cache fallback
                  → rank_scenario (pgvector + LightGBM)
                  → report_builder (catalog playbook/pricing)
                  → recommendations JSONB
@@ -88,5 +89,5 @@ backend/app/
 ## Notes
 
 - `main.py` imports `lightgbm` before modules that load sentence-transformers (macOS native lib order).
-- Exact cache uses `scenario_profiles.normalized_hash` (Redis deferred to Phase 5).
+- Exact cache uses `normalized_hash` — Redis first, Postgres fallback (see [phase5.md](phase5.md)).
 - Ranker artifact is gitignored; train locally after catalog changes.

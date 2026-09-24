@@ -179,6 +179,7 @@ CREATE TABLE recommendation_feedback (
     rating              feedback_rating,
     selected_tool_id    UUID REFERENCES tools(id) ON DELETE SET NULL,
     comment             TEXT,
+    exported_at         TIMESTAMPTZ,           -- set when exported for ML retrain (Phase 5)
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 

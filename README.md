@@ -29,6 +29,8 @@ tech-advisor-app/
 
 **Phase 4 (complete)** — Next.js UI (intake modes, report, feedback). See [docs/phase4-ui.md](docs/phase4-ui.md).
 
+**Phase 5 (complete)** — Redis cache + feedback export/retrain pipeline. See [docs/phase5.md](docs/phase5.md).
+
 | Artifact | Location |
 |----------|----------|
 | Postgres schema | [backend/db/schema.sql](backend/db/schema.sql) |
@@ -45,7 +47,7 @@ tech-advisor-app/
 - Node.js 20+
 - Python 3.13+
 - PostgreSQL 15+ with pgvector
-- Redis (Phase 5+)
+- Redis (Phase 5 — optional; API falls back to Postgres cache)
 
 ## Getting started
 
@@ -115,4 +117,10 @@ uvicorn main:app --reload
 
 Open [http://localhost:8000/docs](http://localhost:8000/docs) for the API docs.
 
+Optional Redis (macOS): `brew install redis && brew services start redis`
+
+Apply Phase 5 DB migration once: `psql "$DATABASE_URL" -f backend/db/migrations/005_phase5_feedback_export.sql`
+
 API flow: `POST /sessions` → `POST /sessions/{id}/intake` → `POST /sessions/{id}/recommend` → optional `POST /feedback`. See [docs/phase3-api.md](docs/phase3-api.md).
+
+Feedback retrain: `python scripts/ml/export_feedback.py` then `python ml/train.py --include-feedback`. See [docs/phase5.md](docs/phase5.md).
