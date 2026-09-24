@@ -65,18 +65,18 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
     >
       <div className="grid gap-4 md:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-700">Industry</span>
+          <span className="text-sm font-medium text-zinc-300">Industry</span>
           <input
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="input-field"
             value={industry}
             onChange={(event) => setIndustry(event.target.value)}
             placeholder="e-commerce, b2b_saas, ..."
           />
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-700">Company size</span>
+          <span className="text-sm font-medium text-zinc-300">Company size</span>
           <select
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="input-field"
             value={companySize}
             onChange={(event) => setCompanySize(event.target.value)}
             required
@@ -90,9 +90,9 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
           </select>
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-700">Monthly budget</span>
+          <span className="text-sm font-medium text-zinc-300">Monthly budget</span>
           <select
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="input-field"
             value={budgetRange}
             onChange={(event) => setBudgetRange(event.target.value)}
             required
@@ -106,9 +106,9 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
           </select>
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-700">Technical maturity</span>
+          <span className="text-sm font-medium text-zinc-300">Technical maturity</span>
           <select
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="input-field"
             value={technicalMaturity}
             onChange={(event) => setTechnicalMaturity(event.target.value)}
           >
@@ -123,12 +123,16 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
       </div>
 
       <fieldset className="space-y-3">
-        <legend className="text-sm font-medium text-slate-700">Primary goals</legend>
+        <legend className="text-sm font-medium text-zinc-300">Primary goals</legend>
         <div className="grid gap-2 sm:grid-cols-2">
           {GOAL_OPTIONS.map((goal) => (
-            <label key={goal.value} className="flex items-center gap-2 text-sm text-slate-700">
+            <label
+              key={goal.value}
+              className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-white/6 bg-white/[0.02] px-3 py-2 text-sm text-zinc-300 transition hover:border-white/12 hover:bg-white/[0.04]"
+            >
               <input
                 type="checkbox"
+                className="checkbox-field"
                 checked={goals.includes(goal.value)}
                 onChange={() => toggleGoal(goal.value)}
               />
@@ -139,9 +143,9 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
       </fieldset>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-slate-700">Existing stack (comma-separated)</span>
+        <span className="text-sm font-medium text-zinc-300">Existing stack (comma-separated)</span>
         <input
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="input-field"
           value={stack}
           onChange={(event) => setStack(event.target.value)}
           placeholder="shopify, hubspot, slack"
@@ -149,9 +153,9 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-slate-700">Constraints (comma-separated)</span>
+        <span className="text-sm font-medium text-zinc-300">Constraints (comma-separated)</span>
         <input
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="input-field"
           value={constraints}
           onChange={(event) => setConstraints(event.target.value)}
           placeholder="must_integrate_hubspot, no_code_only"
@@ -159,9 +163,9 @@ export function WizardForm({ initialProfile, onSubmit, loading }: WizardFormProp
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm font-medium text-slate-700">Additional context</span>
+        <span className="text-sm font-medium text-zinc-300">Additional context</span>
         <textarea
-          className="min-h-28 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="input-field min-h-28 resize-y"
           value={summary}
           onChange={(event) => setSummary(event.target.value)}
           placeholder="Anything else we should know about your scenario?"

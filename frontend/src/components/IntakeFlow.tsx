@@ -11,6 +11,7 @@ import { ErrorBanner } from "@/components/ErrorBanner";
 import { QuickAskForm } from "@/components/QuickAskForm";
 import { WizardForm } from "@/components/WizardForm";
 import { Card } from "@/components/ui/Card";
+import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
 
 interface IntakeFlowProps {
   sessionId: string;
@@ -51,19 +52,23 @@ export function IntakeFlow({ sessionId, mode }: IntakeFlowProps) {
 
   return (
     <AppShell subtitle={MODE_LABELS[mode].title}>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900">{MODE_LABELS[mode].title}</h1>
-          <p className="mt-2 text-slate-600">{MODE_LABELS[mode].description}</p>
-        </div>
+      <div className="space-y-8">
+        <MotionFadeIn>
+          <p className="section-label">{MODE_LABELS[mode].title}</p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
+            Tell us about{" "}
+            <span className="gradient-text">your scenario</span>
+          </h1>
+          <p className="mt-3 max-w-2xl text-zinc-400">{MODE_LABELS[mode].description}</p>
+        </MotionFadeIn>
 
         {error ? <ErrorBanner error={error} /> : null}
 
-        <Card>
+        <Card delay={0.1}>
           {showClarifying ? (
             <>
-              <h2 className="text-lg font-medium text-slate-900">A few more details</h2>
-              <p className="mt-2 text-sm text-slate-600">
+              <h2 className="text-lg font-semibold text-zinc-100">A few more details</h2>
+              <p className="mt-2 text-sm text-zinc-400">
                 Answer the questions below so we can tailor recommendations.
               </p>
               <div className="mt-6">
@@ -83,8 +88,8 @@ export function IntakeFlow({ sessionId, mode }: IntakeFlowProps) {
             />
           ) : mode === "guided" ? (
             <>
-              <h2 className="text-lg font-medium text-slate-900">Tell us about your business</h2>
-              <p className="mt-2 text-sm text-slate-600">
+              <h2 className="text-lg font-semibold text-zinc-100">Tell us about your business</h2>
+              <p className="mt-2 text-sm text-zinc-400">
                 Start with a short summary. We&apos;ll ask follow-up questions if needed.
               </p>
               <div className="mt-6">

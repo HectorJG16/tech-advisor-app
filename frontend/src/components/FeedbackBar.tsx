@@ -12,6 +12,12 @@ interface FeedbackBarProps {
   rankedTools: RankedTool[];
 }
 
+const RATING_LABELS: Record<FeedbackRating, string> = {
+  positive: "Helpful",
+  neutral: "Okay",
+  negative: "Not helpful",
+};
+
 export function FeedbackBar({ recommendationId, rankedTools }: FeedbackBarProps) {
   const [rating, setRating] = useState<FeedbackRating | null>(null);
   const [selectedToolId, setSelectedToolId] = useState("");
@@ -40,16 +46,23 @@ export function FeedbackBar({ recommendationId, rankedTools }: FeedbackBarProps)
 
   if (submitted) {
     return (
-      <Card className="border-teal-200 bg-teal-50/40">
-        <p className="text-sm text-teal-800">Thanks — your feedback was recorded.</p>
+      <Card
+        className="border-cyan-400/20 bg-gradient-to-r from-cyan-400/10 to-violet-400/10"
+        delay={0.5}
+      >
+        <p className="text-sm text-cyan-200">Thanks — your feedback was recorded.</p>
       </Card>
     );
   }
 
   return (
-    <Card>
-      <h2 className="text-lg font-semibold text-slate-900">Was this helpful?</h2>
-      {error ? <div className="mt-4"><ErrorBanner error={error} /></div> : null}
+    <Card delay={0.48}>
+      <h2 className="text-lg font-semibold text-zinc-100">Was this helpful?</h2>
+      {error ? (
+        <div className="mt-4">
+          <ErrorBanner error={error} />
+        </div>
+      ) : null}
       <div className="mt-4 flex flex-wrap gap-2">
         {(["positive", "neutral", "negative"] as FeedbackRating[]).map((value) => (
           <Button
@@ -58,14 +71,14 @@ export function FeedbackBar({ recommendationId, rankedTools }: FeedbackBarProps)
             variant={rating === value ? "primary" : "secondary"}
             onClick={() => setRating(value)}
           >
-            {value}
+            {RATING_LABELS[value]}
           </Button>
         ))}
       </div>
-      <label className="mt-4 block space-y-2">
-        <span className="text-sm font-medium text-slate-700">Which tool did you prefer?</span>
+      <label className="mt-5 block space-y-2">
+        <span className="text-sm font-medium text-zinc-300">Which tool did you prefer?</span>
         <select
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="input-field"
           value={selectedToolId}
           onChange={(event) => setSelectedToolId(event.target.value)}
         >
@@ -78,15 +91,15 @@ export function FeedbackBar({ recommendationId, rankedTools }: FeedbackBarProps)
         </select>
       </label>
       <label className="mt-4 block space-y-2">
-        <span className="text-sm font-medium text-slate-700">Comments</span>
+        <span className="text-sm font-medium text-zinc-300">Comments</span>
         <textarea
-          className="min-h-24 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="input-field min-h-24 resize-y"
           value={comment}
           onChange={(event) => setComment(event.target.value)}
           placeholder="Optional feedback"
         />
       </label>
-      <Button className="mt-4" disabled={loading} onClick={() => void handleSubmit()}>
+      <Button className="mt-5" disabled={loading} onClick={() => void handleSubmit()}>
         {loading ? "Sending..." : "Submit feedback"}
       </Button>
     </Card>

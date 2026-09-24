@@ -20,7 +20,7 @@ export function ErrorBanner({ error }: ErrorBannerProps) {
   }
 
   return (
-    <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+    <div className="rounded-xl border border-red-400/25 bg-red-500/10 px-4 py-3 text-sm text-red-200 shadow-[0_0_24px_rgba(239,68,68,0.12)] backdrop-blur-sm">
       {message}
     </div>
   );

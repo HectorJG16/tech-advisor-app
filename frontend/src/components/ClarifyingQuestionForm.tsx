@@ -64,10 +64,10 @@ export function ClarifyingQuestionForm({
     >
       {questions.map((question) => (
         <label key={question.field} className="block space-y-2">
-          <span className="text-sm font-medium text-slate-700">{question.question}</span>
+          <span className="text-sm font-medium text-zinc-300">{question.question}</span>
           {question.options?.length ? (
             <select
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="input-field"
               value={answers[question.field] ?? ""}
               onChange={(event) =>
                 setAnswers((current) => ({ ...current, [question.field]: event.target.value }))
@@ -84,9 +84,13 @@ export function ClarifyingQuestionForm({
           ) : question.field === "primary_goals" ? (
             <div className="grid gap-2 sm:grid-cols-2">
               {GOAL_OPTIONS.map((goal) => (
-                <label key={goal.value} className="flex items-center gap-2 text-sm">
+                <label
+                  key={goal.value}
+                  className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-white/6 bg-white/[0.02] px-3 py-2 text-sm text-zinc-300"
+                >
                   <input
                     type="checkbox"
+                    className="checkbox-field"
                     checked={(answers[question.field] ?? "")
                       .split(",")
                       .filter(Boolean)
@@ -110,7 +114,7 @@ export function ClarifyingQuestionForm({
             </div>
           ) : (
             <textarea
-              className="min-h-24 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="input-field min-h-24 resize-y"
               value={answers[question.field] ?? ""}
               onChange={(event) =>
                 setAnswers((current) => ({ ...current, [question.field]: event.target.value }))
