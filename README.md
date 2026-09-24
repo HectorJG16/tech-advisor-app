@@ -9,8 +9,8 @@ tech-advisor-app/
 ├── backend/           # FastAPI API + Pydantic schemas
 │   ├── db/            # Postgres schema (schema.sql)
 │   └── schemas/       # API contracts (Phase 0)
-├── frontend/          # Next.js web app
-│   └── src/types/     # TypeScript API types (mirror backend)
+├── frontend/          # Next.js web app (Phase 4 UI)
+│   └── src/           # app routes, components, lib/api, types
 ├── data/              # Golden set and example payloads
 ├── scripts/curation/  # Catalog import and embedding scripts
 ├── ml/                # Training + eval (Phase 2)
@@ -26,6 +26,8 @@ tech-advisor-app/
 **Phase 2 (complete)** — Retrieval + LightGBM ranker scripts. See [ml/README.md](ml/README.md).
 
 **Phase 3 (complete)** — FastAPI intake, ranking, and template reports. See [docs/phase3-api.md](docs/phase3-api.md).
+
+**Phase 4 (complete)** — Next.js UI (intake modes, report, feedback). See [docs/phase4-ui.md](docs/phase4-ui.md).
 
 | Artifact | Location |
 |----------|----------|
@@ -89,13 +91,15 @@ DATABASE_URL=postgresql://tech_advisor:your_password@localhost:5432/tech_advisor
 
 ### Frontend
 
+Requires the backend API (see above). Set `NEXT_PUBLIC_API_URL=http://localhost:8000` in `.env` or `frontend/.env.local`.
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Flow: pick intake mode → answer questions → view advisory report.
 
 ### Backend
 
