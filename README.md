@@ -1,53 +1,48 @@
 # Tech Advisor App
 
-AI-powered advisor that recommends business automation tools based on a user's scenario, with ranked results and template-based advisory reports.
+AI-powered advisor that recommends business automation tools from a business scenario, with ranked results and template-based advisory reports.
+
+**Stack:** Next.js · FastAPI · PostgreSQL + pgvector · LightGBM · Redis (optional)
+
+Built as a local/dev demo — anonymous sessions, no production auth. See [LICENSE](LICENSE).
+
+## Features
+
+- Multiple intake modes (quick ask, wizard, guided clarifying questions)
+- pgvector retrieval + offline-trained LightGBM ranker
+- Template advisory reports from catalog playbooks and pricing
+- Exact-match recommendation cache (Redis with Postgres fallback)
+- Feedback export path for offline retraining
 
 ## Project structure
 
 ```
 tech-advisor-app/
-├── backend/           # FastAPI API + Pydantic schemas
-│   ├── db/            # Postgres schema (schema.sql)
-│   └── schemas/       # API contracts (Phase 0)
-├── frontend/          # Next.js web app (Phase 4 UI)
-│   └── src/           # app routes, components, lib/api, types
+├── backend/           # FastAPI API, services, repositories
+├── frontend/          # Next.js web app
 ├── data/              # Golden set and example payloads
 ├── scripts/curation/  # Catalog import and embedding scripts
-├── ml/                # Training + eval (Phase 2)
-└── docs/              # Architecture and contract docs
+├── ml/                # Training, eval, and inference helpers
+└── docs/              # Architecture and API documentation
 ```
 
-## Phase status
+## Documentation
 
-**Phase 0 (complete)** — Schemas and contracts. See [docs/phase0-contracts.md](docs/phase0-contracts.md).
-
-**Phase 1 (complete)** — Catalog loaded (30 tools), embeddings, golden set. See [scripts/curation/README.md](scripts/curation/README.md).
-
-**Phase 2 (complete)** — Retrieval + LightGBM ranker scripts. See [ml/README.md](ml/README.md).
-
-**Phase 3 (complete)** — FastAPI intake, ranking, and template reports. See [docs/phase3-api.md](docs/phase3-api.md).
-
-**Phase 4 (complete)** — Next.js UI (intake modes, report, feedback). See [docs/phase4-ui.md](docs/phase4-ui.md).
-
-**Phase 5 (complete)** — Redis cache + feedback export/retrain pipeline. See [docs/phase5.md](docs/phase5.md).
-
-| Artifact | Location |
-|----------|----------|
-| Postgres schema | [backend/db/schema.sql](backend/db/schema.sql) |
-| Pydantic models | [backend/schemas/](backend/schemas/) |
-| TypeScript types | [frontend/src/types/api.ts](frontend/src/types/api.ts) |
-| Catalog source (30 tools) | [scripts/curation/catalog_data.py](scripts/curation/catalog_data.py) |
-| Golden set (30 scenarios) | [data/golden_set.json](data/golden_set.json) |
-| ML pipeline | [ml/](ml/) |
-| Curation commands | [scripts/curation/README.md](scripts/curation/README.md) |
-| Report example | [data/advisory_report.example.json](data/advisory_report.example.json) |
+| Topic | Doc |
+|-------|-----|
+| API and recommend flow | [docs/phase3-api.md](docs/phase3-api.md) |
+| UI | [docs/phase4-ui.md](docs/phase4-ui.md) |
+| Redis cache and feedback retrain | [docs/phase5.md](docs/phase5.md) |
+| Schemas and contracts | [docs/phase0-contracts.md](docs/phase0-contracts.md) |
+| ML pipeline | [ml/README.md](ml/README.md) |
+| Build phases and artifact map | [docs/development-phases.md](docs/development-phases.md) |
 
 ## Prerequisites
 
 - Node.js 20+
 - Python 3.13+
 - PostgreSQL 15+ with pgvector
-- Redis (Phase 5 — optional; API falls back to Postgres cache)
+- Redis (optional; API falls back to Postgres cache)
 
 ## Getting started
 
@@ -93,7 +88,7 @@ DATABASE_URL=postgresql://tech_advisor:your_password@localhost:5432/tech_advisor
 
 ### Frontend
 
-Requires the backend API (see above). Set `NEXT_PUBLIC_API_URL=http://localhost:8000` in `.env` or `frontend/.env.local`.
+Requires the backend API (see below). Set `NEXT_PUBLIC_API_URL=http://localhost:8000` in `.env` or `frontend/.env.local`.
 
 ```bash
 cd frontend
@@ -119,8 +114,16 @@ Open [http://localhost:8000/docs](http://localhost:8000/docs) for the API docs.
 
 Optional Redis (macOS): `brew install redis && brew services start redis`
 
-Apply Phase 5 DB migration once: `psql "$DATABASE_URL" -f backend/db/migrations/005_phase5_feedback_export.sql`
+Apply the Phase 5 DB migration once on existing databases:
+
+```bash
+psql "$DATABASE_URL" -f backend/db/migrations/005_phase5_feedback_export.sql
+```
 
 API flow: `POST /sessions` → `POST /sessions/{id}/intake` → `POST /sessions/{id}/recommend` → optional `POST /feedback`. See [docs/phase3-api.md](docs/phase3-api.md).
 
 Feedback retrain: `python scripts/ml/export_feedback.py` then `python ml/train.py --include-feedback`. See [docs/phase5.md](docs/phase5.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
